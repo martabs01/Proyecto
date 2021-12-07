@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://use.fontawesome.com/b99e2c8f94.js"></script>
+    <link rel="stylesheet" href="../librerias/bootstrap.css">
+    <link rel="stylesheet" href="../librerias/datatables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <style>
+
+        p.note {
+            font-size: 1rem;
+            color: red;
+        }
+
+
+
+        label.error {
+            color: red;
+            font-size: 1rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+        input.error, textarea.error {
+            border: 1px dashed red;
+            font-weight: 300;
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<form id="basic-form" action="" method="post">
+    <p>
+        <label for="nombre">Name <span>(required, at least 3 characters)</span></label>
+        <input id="nombre" name="nombre">
+    </p>
+    <p>
+        <label for="age">Your Age <span>(minimum 18)</span></label>
+        <input id="age" name="age">
+    </p>
+    <p>
+        <label class="form-control-label">CORREO</label>
+        <input type="email" id="email" class="form-control" name="email">
+    </p>
+    <p>
+        <label for="weight">Weight <span>(required if age over 50)</span></label>
+        <input id="weight" name="weight">
+    </p>
+    <p>
+        <input class="submit" type="submit" value="SUBMIT" onclick="validar()">
+    </p>
+</form>
+
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script>
+    function validar(){
+
+            $("#basic-form").validate({
+                rules: {
+                    nombre : {
+                        required: true,
+                        minlength: 3
+                    },
+                    age: {
+                        required: true,
+                        number: true,
+                        min: 18
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    weight: {
+                        required: {
+                            depends: function(elem) {
+                                return $("#age").val() > 50
+                            }
+                        },
+                        number: true,
+                        min: 0
+                    }
+                },
+                messages : {
+                    nombre: {
+                        minlength: "Name should be at least 3 characters"
+                    },
+                    age: {
+                        required: "Please enter your age",
+                        number: "Please enter your age as a numerical value",
+                        min: "You must be at least 18 years old"
+                    },
+                    email: {
+                        email: "The email should be in the format: abc@domain.tld"
+                    },
+                    weight: {
+                        required: "People with age over 50 have to enter their weight",
+                        number: "Please enter your weight as a numerical value"
+                    }
+                }
+            });
+
+    }
+
+</script>

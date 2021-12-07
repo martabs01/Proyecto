@@ -1,0 +1,70 @@
+<!--
+    Alumno: Marta Broncano Suárez
+    Asignatura: Proyecto San Romilla
+    Curso: 20-21
+    Descripción: Mockup del alta de donaciones
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta colaboradores</title>
+    <script src="https://use.fontawesome.com/b99e2c8f94.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos/estilos.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="row " id="mostrarInsertar">
+                <div class="col-lg-3 col-md-2"></div>
+                <div class="col-lg-6 col-md-8 login-box">
+                    <div class="col-lg-12 pt-3 d-flex d-grid gap-2 d-md-flex justify-content-md-end"><button  type="button" class="btn btn-danger btn-sm me-md-2"><i class="bi bi-x-lg"></i></button></div>
+                    <div class="col-lg-12 pt-3 d-flex justify-content-center">
+                        <i class="bi bi-person-plus-fill login-key" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-lg-12 login-title">
+                        NUEVA DONACIÓN
+                    </div>
+                    <div class="col-lg-12 login-form">
+                        <div class="col-lg-12 login-form">
+                            <form id="insertar" class="cmxform needs-validation" action="#" method="POST">
+                                <div class="form-group">
+                                    <label class="form-control-label">NOMBRE</label>
+                                    <input type="text" id="nombre" class="form-control" name="nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">APELLIDOS</label>
+                                    <input type="text" id="apellidos" class="form-control" name="apellidos" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">IMPORTE</label>
+                                    <input type="text" id="donacion" class="form-control mt-4" name="donacion" required placeholder="Importe mínimo 2€">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label pb-1">TALLA CAMISETA</label>
+                                    <input type="text" id="talla" class="form-control mt-4" name="talla" required placeholder="Importe mínimo 2€">
+                                </div>
+                                <div class="row loginbttm p-3">
+                                    <div class="col-lg-6 login-btm login-text">
+                                        Por favor, rellene el formulario para dar de alta un nuevo colaborador
+                                    </div>
+                                    <div class="col-lg-6 login-btm login-button">
+                                        <button type="submit" class="btn btn-outline-primary" name="enviar" id="enviar_colaborador" onclick="validarInsertar()">AÑADIR</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-2"></div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
