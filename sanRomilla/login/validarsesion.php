@@ -1,11 +1,11 @@
 <?php
-    /*
+/*
         Alumno: Marta Broncano Suárez
         Asignatura: Proyecto San Romilla
         Curso: 20-21
         Descripción: Archivo de validaciones del formulario de inicio de sesión
      */
-    //Incluimos que el archivo ha sido incluido para poder trabjar con los métodos definidos
+//Incluimos que el archivo ha sido incluido para poder trabjar con los métodos definidos
 require_once ('../basedatos/operaciones.php');
     //Funcion que contiene las validaciones del inicio de sesión
     function validar(){
@@ -22,26 +22,27 @@ require_once ('../basedatos/operaciones.php');
                 if ($objeto->inicio_sesion($correo, $password) == true){
                     //Consulta del correo del usuario
                     $sql = "SELECT * FROM colaborador WHERE correo='".$correo."'";
-                    //Método que envia la consulta a la base de datos
+                    //Método que realiza consulta
                     $objeto->hacer_consultas($sql);
-                    //Comprobación de que la consulta nos ha devuelto filas
+                    //Comprobación de la consulta, si se ha realizado correctamente
                     if($objeto->comprobar_consulta()>0){
-                        //Método que extrae las filas de la consulta devuelta
+                        //Variable que guarda el resultado del método que extrae las filas
                         $fila=$objeto->extraer_filas();
-                        //Variable donde guardamos un dato de la fila extraida, en este caso el tipo de usuario
                         //Método que inicia una nueva sesión o reanudar la existente
                         session_start();
-                        //Variable que guarda el correo de la sesión iniciada
+                        //Variable que guarda el tipo de colaborador que ha iniciado la sesión
                         $tipo=$fila["tipo"];
+                        //Variable que guarda el correo de la sesión iniciada
                         $_SESSION["correo"]=$correo;
+                        //Variable que guarda el tipo de colaborador de la sesión iniciada
                         $_SESSION["tipo"]=$tipo;
                         //Comprobacion del tipo de usuario que ha iniciado la sesión
                         switch ($tipo){
-                            case 'c':
+                            case 'c'://Colaborador
                                 //Método de redirección a la página de incio del colaborador si el usuario es de tipo colaborador
                                 header('location:../colaborador/inicio_colaborador.php');
                                 break;
-                            case 'a':
+                            case 'a'://Coordinador
                                 //Método de redirección a la página de incio del coordinador si el usuario es de tipo coordinaodr
                                 header('location:../coordinador/inicio_coordinador.php');
                                 break;

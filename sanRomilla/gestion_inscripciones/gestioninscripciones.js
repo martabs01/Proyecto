@@ -1,23 +1,26 @@
 /*
-        Alumno: Marta Broncano Suárez
-        Asignatura: Proyecto San Romilla
-        Curso: 20-21
-        Descripción: Archivo que contiene las funciones que se van a emplear para la gestión de los colaboradores
+    Alumno: Marta Broncano Suárez
+    Asignatura: Proyecto San Romilla
+    Curso: 20-21
+    Descripción: Archivo que contiene las funciones que se van a emplear para la gestión de los colaboradores
 */
+//Función que realiza una petición para averiguar x datos en base a la fecha de nacimiento
 function fecha_inscripcion(){
-    var accion='fecha_inscripcion';
+    var accion='fecha_inscripcion'; //Variable que guarda la acción que queramos hacer al realizar la petición
+    //Petición
     $.post('acciones.php?accion='+accion,function(data){
+        //Método que realiza diferentes acciones según la respuesta devuelta
         switch (data.trim()) {
-            case 'ok':
+            case 'ok': //Plazo inscripción abierto
                 //document.getElementById("inscripcion").disabled = false;
                 //$('#cuadro_inscripcion1').hide();
                 //$('#cuadro_inscripcion2').hide();
                 break;
-            case 'ko1':
+            case 'ko1'://Plazo inscripción no abierto
                 //document.getElementById("inscripcion").disabled = true;
                 //$('#cuadro_inscripcion2').hide();
                 break;
-            case 'ko2':
+            case 'ko2'://Plazo inscripción cerrado
                 //document.getElementById("inscripcion").disabled = true;
                 //$('#cuadro_inscripcion1').hide();
                 break;
@@ -25,11 +28,12 @@ function fecha_inscripcion(){
         }
     });
 }
+//Función que al cargar el documento hace una petición para consultar los registros de la baase de datos y mostrarlos
 $(document).ready(function() {
     fecha_inscripcion();
-    var accion='consultar';
-    var funcion='listar';
-
+    var accion='consultar'; //Variable que guarda la acción que queramos hacer al realizar la petición
+    var funcion='listar'; //Variable que recoge el nombre de la función
+    //Función que realiza la petición y muestra los registros devueltos
     $('#example').DataTable({
         "ajax": {
             "url":"acciones.php?accion="+accion,
@@ -53,7 +57,7 @@ $(document).ready(function() {
     });
 
 } );
-
+//Registro de comentarios de la librería en español
 let es = {
     "processing": "Procesando...",
     "lengthMenu": "Mostrar _MENU_ registros",
@@ -260,7 +264,8 @@ let es = {
 
 };
 
-var i=0;
+var i=0;//Inicialización de variable que usaremos para realizar la inserción dinámica
+//Función que contiene la estructura del formulario dinámico
 function formulario(){
     $('#dynamic_field').append('<table class="table mb-5" id="table'+i+'">' +
         '<tr class="borde">'+
@@ -313,20 +318,21 @@ function formulario(){
         '</tr> ' +
         '</table>')
     i++;
-
+    //Función que elimina la tabla sleccionada del formulario
     $(document).on('click', '.btn_remove', function(){
-        var button_id = $(this).attr("id");
-        $('#table'+button_id+'').remove();
+        var button_id = $(this).attr("id");//Método que guarda el id seleccionado
+        $('#table'+button_id+'').remove();//Métodopara eliminar elemento
     });
-
+    //Función que averigua el precio del dorsal al perder el foco en la fecha
     $(document).on('blur', '.fecha', function(){
-        var accion='precio_dorsal';
-        var str=$("#formulario").serialize();
-        var fecha_id = $(this).attr("id");
+        var accion='precio_dorsal';//Variable que guarda la acción que queramos hacer al realizar la petición
+        var str=$("#formulario").serialize();//Variable que guarda los datos del formulario
+        var fecha_id = $(this).attr("id");//Método que guarda el id seleccionado
+        //Petición
         $.post('acciones.php?accion='+accion+'&fecha_id='+fecha_id,str,function(data){
             var precio=data;
-            $('#donacion'+fecha_id+'').attr("value",precio);
-            $('#donacion'+fecha_id+'').attr("placeholder","Indique el importe (mínimo "+precio+"€)");
+            $('#donacion'+fecha_id+'').attr("value",precio); //Método que añade valor al elemento selecionado
+            $('#donacion'+fecha_id+'').attr("placeholder","Indique el importe (mínimo "+precio+"€)"); //Método que añade placeholder al elemento selecionado
         });
     })
 
@@ -336,9 +342,10 @@ function formulario(){
     });
 
 };
-
+//Función que muestra el formulario de registro de inscripciones
 function mostrarInsertar() {
-    var accion='mostrar_insertar';
+    var accion='mostrar_insertar';//Variable que guarda la acción que queramos hacer al realizar la petición
+    //Petición
     $.post('acciones.php?accion='+accion,function(data){
         $('#mostrarInsertar').html(data);
         $(formulario()).html(data);
@@ -351,38 +358,42 @@ function mostrarInsertar() {
         $('#editar').css('display','none');
     });
 }
-
+//Función que muestra un cuadro de mensaje con el total del precio de la compra
 function totalCompra(){
-    var accion='total_compra';
-    var str = $("#formulario").serialize();
+    var accion='total_compra';//Variable que guarda la acción que queramos hacer al realizar la petición
+    var str = $("#formulario").serialize();//Variable que guarda los datos del formulario
+    //Petición
     $.post('acciones.php?accion='+accion,str,function(data){
-        if(data.trim()==='ko'){
+        //Condición que realiza diferentes acciones según la respuesta devuelta
+        if(data.trim()==='ko'){//Precio incorrecto
             alert("El importe de la donación no puede ser menor al precio del dorsal")
-        }else{
+        }else{//Precio correcto
             $('#cuadroTramitar').html(data);
             $('#cuadroTramitar').css('display','block');
         }
     });
 }
-
+//Funcion que oculta el cuadro de mensaje de confirmación de inscripciones si pulsa "volver"
 function seguirComprando(){
     $('#cuadroTramitar').css('display','none');
 }
-
+//Función que realiza la petición para el registro de donaciones
 function insertar() {
-    var accion='insertar';
-    var str = $("#formulario").serialize();
+    var accion='insertar'; //Variable que guarda la acción que queramos hacer al realizar la petición
+    var str = $("#formulario").serialize(); //Variable que guarda los datos del formulario
+    //Petición
     $.post('acciones.php?accion='+accion,str,function(data){
-        var condiciones = $("#aceptar").is(":checked");
-        if(data.trim()==='no'){
+        var condiciones = $("#aceptar").is(":checked"); //Comprobación del campo check marcado
+        //Condición que realiza diferentes acciones según la respuesta devuelta
+        if(data.trim()==='no'){//Importe de donación menor al establecido
             alert("El importe de donación no puede ser menor al precio del dorsal")
         }else{
-            if (!condiciones) {
+            if (!condiciones) {//Condiciones no aceptadas
                 alert("Debe aceptar las condiciones");
             }else{
-                if(data.trim()==='ko'){
+                if(data.trim()==='ko'){//Error consulta
                     alert("Ha habido un error al realizar la petición solicitada intentelo de nuevo");
-                }else{
+                }else{//Consulta correcta
                     $('#cuadroTramitar').css('display','none');
                     $('#tabla').css('display','block');
                     location.reload();
@@ -392,15 +403,17 @@ function insertar() {
 
     });
 }
-
+//Función que muestra el formulario de edición de colaboradores
 function mostrarEditar(id){
-    var accion='mostrar_editar';
+    var accion='mostrar_editar'; //Variable que guarda la acción que queramos hacer al realizar la petición
+    //Petición
     $.post('acciones.php?id='+id+'&accion='+accion,function(data){
         $('#editar').html(data);
         $('#editar').css('display','block');
         $('#tabla').css('display','none');
     });
 }
+//Función que valida la edición de colaboradores
 function validarEditar(id){
     $("#submitenviar").validate({
         rules: {
@@ -428,7 +441,6 @@ function validarEditar(id){
             }
 
         },
-
         messages : {
             nombre: {
                 required:"*Campo obligatorio",
@@ -457,11 +469,11 @@ function validarEditar(id){
                 dorsal: "*Sólo números"
             }
 
-
         },submitHandler: function() {
             editar(id);
         }
     });
+    //Validaciones personalizadas que no entran dentro de la librería
     jQuery.validator
         .addMethod(
             "isMobile",
@@ -486,17 +498,17 @@ function validarEditar(id){
         var dorsal = /^([0-9])*$/;
         return this.optional(element) || dorsal.test(value);
     }, "*Sólo números");
-
-
 }
+//Función que realiza la petición para la edición de inscripciones
 function editar(id){
-    var accion='editar';
-    var str = $("#submitenviar").serialize();
+    var accion='editar'; //Variable que guarda la acción que queramos hacer al realizar la petición
+    var str = $("#submitenviar").serialize(); //Variable que guarda los datos del formulario
+    //Petición
     $.post('acciones.php?id='+id+'&accion='+accion,str,function(data){
-        console.log(data);
-        if(data.trim()==='ko'){
+        //Condición que realiza diferentes acciones según la respuesta devuelta
+        if(data.trim()==='ko'){ //Error consulta
             alert("Ha habido un error al realizar la petición solicitada intentelo de nuevo");
-        }else{
+        }else{//Consulta correcta
             $('#editar').css('display','none');
             location.reload();
         }

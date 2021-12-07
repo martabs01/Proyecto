@@ -6,7 +6,7 @@
     Curso: 20-21
     Descripción: Página inicial de la gestión de inscripciones
 */
-session_start();
+session_start(); //Método que recoge la sesión iniciada
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,7 @@ session_start();
     <link rel="stylesheet" href="../estilos/estilos.css">
 </head>
 <?php
+//Comprobación de si existe la sesión iniciada por el usuario, si existe muestra la página principal, sino muestra error
 if(isset($_SESSION["correo"])){
     echo '
 <body>
@@ -50,7 +51,7 @@ if(isset($_SESSION["correo"])){
                     </span>
                 </a>
             </li>';
-
+            //Comprobación del tipo de colaborador que ha iniciado sesión, si es coordinador(admin) mostramos la opción de gestión de colaboradores
             if($_SESSION["tipo"]=='a'){
                 echo '<li class="has-subnav">
                 <a href="../gestion_colaboradores/gestioncolaborador.php">
@@ -60,7 +61,6 @@ if(isset($_SESSION["correo"])){
                     </span>
                 </a>
                 </li>';
-
             }
             echo'
             <li class="has-subnav">

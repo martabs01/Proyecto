@@ -4,8 +4,9 @@
     Alumno: Marta Broncano Suárez
     Asignatura: Proyecto San Romilla
     Curso: 20-21
-    Descripción: Página inicial de la sesión del coordinador*/
-session_start();
+    Descripción: Página inicial de la sesión del coordinador
+*/
+session_start(); //Método que recoge la sesión iniciada
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,6 +20,7 @@ session_start();
     <link rel="stylesheet" href="../estilos/estilos.css" type="text/css">
 </head>
 <?php
+//Comprobación de si existe la sesión iniciada por el usuario, si existe muestra la página principal, sino muestra error
 if(isset($_SESSION["correo"])){
     echo '
 

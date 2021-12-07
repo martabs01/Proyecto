@@ -1,13 +1,16 @@
 /*
-        Alumno: Marta Broncano Suárez
-        Asignatura: Proyecto San Romilla
-        Curso: 20-21
-        Descripción: Archivo que contiene las funciones que se van a emplear para la gestión de donaciones
+    Alumno: Marta Broncano Suárez
+    Asignatura: Proyecto San Romilla
+    Curso: 20-21
+    Descripción: Archivo que contiene las funciones que se van a emplear para la gestión de donaciones
 */
-
+//Función que al cargar el documento hace una petición para consultar los registros de la baase de datos y mostrarlos
 $(document).ready(function() {
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='consultar';
+    //Variable que recoge el nombre de la función
     var funcion='listar';
+    //Función que realiza la petición y muestra los registros devueltos
     $('#example').DataTable({
         "ajax": {
             "url":"acciones.php?accion="+accion,
@@ -26,8 +29,7 @@ $(document).ready(function() {
     });
 
 } );
-
-
+//Registro de comentarios de la librería en español
 let es = {
     "processing": "Procesando...",
     "lengthMenu": "Mostrar _MENU_ registros",
@@ -231,9 +233,11 @@ let es = {
     },
     "info": "Mostrando _START_ a _END_ de _TOTAL_ registros"
 };
-
+//Función que muestra el formulario de registro de donaciones
 function mostrarInsertar() {
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='mostrar_insertar';
+    //Petición
     $.post('acciones.php?accion='+accion,function(data){
         $('#mostrarInsertar').html(data);
         $('#mostrarInsertar').css('display','block');
@@ -242,7 +246,7 @@ function mostrarInsertar() {
         $('#editar').css('display','none');
     });
 }
-
+//Función que valida el registro de donaciones
 function validarInsertar(){
     $("#insertar").validate({
         rules: {
@@ -267,7 +271,6 @@ function validarInsertar(){
                 donacion: true
             },
         },
-
         messages : {
             nombre: {
                 required:"*Campo obligatorio",
@@ -293,7 +296,7 @@ function validarInsertar(){
             donacion();
         }
     });
-
+    //Validaciones personalizadas que no entran dentro de la librería
     jQuery.validator.addMethod("isMobile", function(value, element) {
         var length = value.length;
         var mobile = /^[6-7][0-9]{8}$/;
@@ -311,27 +314,33 @@ function validarInsertar(){
         return this.optional(element) || donacion.test(value);
     }, "*Este campo es tipo numérico");
 }
-
+//Función que muestra el cuadro de mensaje de confirmación de la donación con el precio total
 function donacion() {
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='donacion';
+    //Variable que guarda los datos del formulario
     var str = $("#insertar").serialize();
+    //Petición
     $.post('acciones.php?accion='+accion,str,function(data){
         $('#cuadroTramitar').html(data);
         $('#cuadroTramitar').css('display','block');
     });
 }
-
+//Función que oculta el cuadro de mensaje de confirmación de la donación si pulsa "cancelar"
 function cancelar(){
     $('#cuadroTramitar').css('display','none');
     $('#cuadroTramitar').css('display','none');
 }
-
+//Función que realiza la petición para el registro de donaciones
 function insertar() {
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='insertar';
+    //Variable que guarda los datos del formulario
     var str = $("#insertar").serialize();
+    //Petición
     $.post('acciones.php?accion='+accion,str,function(){
-            $('#mostrarInsertar').css('display','none');
-            location.reload();
+        $('#mostrarInsertar').css('display','none');
+        location.reload();
     });
 }
 

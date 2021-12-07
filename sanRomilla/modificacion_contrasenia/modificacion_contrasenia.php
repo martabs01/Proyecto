@@ -1,12 +1,12 @@
 <?php
-    /*
+/*
         Alumno: Marta Broncano Suárez
         Asignatura: Proyecto San Romilla
         Curso: 20-21
         Descripción: Modificación de la contraseña de los colaboradores
     */
-include ('validarmodificacioncontrasenia.php');
 //Archivo que incluye la validación la modificación de la contraseña
+require_once ('validarmodificacioncontrasenia.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,6 +20,7 @@ include ('validarmodificacioncontrasenia.php');
     <link rel="stylesheet" href="../estilos/estilos.css" type="text/css">
 </head>
 <?php
+//Comprobación de si existe la sesión iniciada por el usuario, si existe muestra la página principal, sino muestra error
 if(isset($_SESSION["correo"])){
     echo '
 <body>
@@ -144,27 +145,27 @@ if(isset($_SESSION["correo"])){
                                     <input type="password" class="form-control" name="repetirpassword">
                                 </div>
                                 <div>';
-                                        //Funcion que para cada resultado devuelto de la validación  muestra un mensaje especifíco
-                                        switch (validar_password()){
-                                            case 1:
+                                        //Método que para cada resultado devuelto de la validación  muestra un mensaje especifíco
+                                        switch (validar()){
+                                            case 1://Campos vacíos
                                                 echo '<p class="error">*Debes completar los campos del formulario</p>';
                                             break;
-                                            case 2:
+                                            case 2://Las contraseñas deben tener mínimo 5 caracteres
                                                 echo'<p class="error">*Las contraseñas deben tener mínimo 5 caracteres</p>';
                                                 break;
-                                            case 3:
+                                            case 3://Las nuevas contraseñas no coinciden
                                                 echo'<p class="error">*Las nuevas contraseñas no coinciden</p>';
                                             break;
-                                            case 4:
+                                            case 4://Contraseña modificada correctamente
                                                 echo'<p class="correcto">*Contraseña modificada correctamente</p>';
                                             break;
-                                            case 5:
+                                            case 5://Error en modificación de contraseña
                                                 echo'<p class="error">*Error en modificación de contraseña</p>';
                                             break;
-                                            case 6:
+                                            case 6://Ninguno de los campos son válidos
                                                 echo'<p class="error">*Ninguno de los campos son válidos</p>';
                                             break;
-                                            case 7:
+                                            case 7://Contraseña actual incorrecta
                                                 echo'<p class="error">*Contraseña actual incorrecta</p>';
                                             break;
                                         }

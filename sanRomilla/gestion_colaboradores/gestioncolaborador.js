@@ -1,13 +1,16 @@
 /*
-        Alumno: Marta Broncano Suárez
-        Asignatura: Proyecto San Romilla
-        Curso: 20-21
-        Descripción: Archivo que contiene las funciones que se van a emplear para la gestión de los colaboradores
+    Alumno: Marta Broncano Suárez
+    Asignatura: Proyecto San Romilla
+    Curso: 20-21
+    Descripción: Archivo que contiene las funciones que se van a emplear para la gestión de los colaboradores
 */
-
+//Función que al cargar el documento hace una petición para consultar los registros de la baase de datos y mostrarlos
 $(document).ready(function() {
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='consultar';
+    //Variable que recoge el nombre de la función
     var funcion='listar';
+    //Función que realiza la petición y muestra los registros devueltos
     $('#example').DataTable({
         "ajax": {
             "url":"acciones.php?accion="+accion,
@@ -28,8 +31,7 @@ $(document).ready(function() {
     });
 
 } );
-
-
+//Registro de comentarios de la librería en español
 let es = {
     "processing": "Procesando...",
     "lengthMenu": "Mostrar _MENU_ registros",
@@ -233,9 +235,11 @@ let es = {
     },
     "info": "Mostrando _START_ a _END_ de _TOTAL_ registros"
 };
-
+//Función que muestra el formulario de registro de colaboradores
 function mostrarInsertar() {
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='mostrar_insertar';
+    //Petición
     $.post('acciones.php?accion='+accion,function(data){
         $('#mostrarInsertar').html(data);
         $('#mostrarInsertar').css('display','block');
@@ -244,7 +248,7 @@ function mostrarInsertar() {
         $('#editar').css('display','none');
     });
 }
-
+//Función que valida el registro de colaboradores
 function validarInsertar(){
     $("#insertar").validate({
         rules: {
@@ -278,7 +282,6 @@ function validarInsertar(){
                 equalTo: "#password"
             },
         },
-
         messages : {
             nombre: {
                 required:"*Campo obligatorio",
@@ -313,7 +316,7 @@ function validarInsertar(){
             insertar();
         }
     });
-
+    //Validaciones personalizadas que no entran dentro de la librería
     jQuery.validator.addMethod("isMobile", function(value, element) {
                 var length = value.length;
                 var mobile = /^[6-7][0-9]{8}$/;
@@ -326,14 +329,18 @@ function validarInsertar(){
         return this.optional(element) || lettersonly.test(value);
     }, "*Sólo letras");
 }
-
+//Función que realiza la petición para el registro de colaboradores
 function insertar() {
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='insertar';
+    //Variable que guarda los datos del formulario
     var str = $("#insertar").serialize();
+    //Petición
     $.post('acciones.php?accion='+accion,str,function(data){
-        if(data.trim()==='ko'){
+        //Condición que realiza diferentes acciones según la respuesta devuelta
+        if(data.trim()==='ko'){ //Error en la consulta
            alert("Ha habido un error al realizar la petición solicitada intentelo de nuevo");
-        }else{
+        }else{ //Consulta realizada
             $('#mostrarInsertar').css('display','none');
             $('#eliminar').css('display','none');
             $('#editar').css('display','none');
@@ -341,9 +348,11 @@ function insertar() {
         }
     });
 }
-
+//Función que muestra el formulario de edición de colaboradores
 function mostrarEditar(id){
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='mostrar_editar';
+    //Petición
     $.post('acciones.php?id='+id+'&accion='+accion,function(data){
         $('#editar').html(data);
         $('#editar').css('display','block');
@@ -351,7 +360,7 @@ function mostrarEditar(id){
         $('#eliminar').css('display','none');
     });
 }
-
+//Función que valida la edición de colaboradores
 function validarEditar(id){
     $("#submitenviar").validate({
         rules: {
@@ -401,6 +410,7 @@ function validarEditar(id){
             editar(id);
         }
     });
+    //Validaciones personalizadas que no entran dentro de la librería
     jQuery.validator
         .addMethod(
             "isMobile",
@@ -416,41 +426,50 @@ function validarEditar(id){
         return this.optional(element) || lettersonly.test(value);
     }, "*Sólo letras");
 }
-
+//Función que realiza la petición para la edición de colaboradores
 function editar(id){
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='editar';
+    //Variable que guarda los datos del formulario
     var str = $("#submitenviar").serialize();
+    //Petición
     $.post('acciones.php?id='+id+'&accion='+accion,str,function(data){
-        if(data.trim()==='ko'){
+        //Condición que realiza diferentes acciones según la respuesta devuelta
+        if(data.trim()==='ko'){//Error consulta
             alert("Ha habido un error al realizar la petición solicitada intentelo de nuevo");
-        }else{
+        }else{//Consulta correcta
             $('#eliminar').css('display','none');
             $('#editar').css('display','none');
             location.reload();
         }
     });
 }
-
+//Función que muestra un cuadro de mensaje con la confirmación de la eliminación del colaborador
 function cuadroEliminar(id){
+    //Variable que guarda la acción que queramos hacer al realizar la petición
     var accion='cuadro_eliminar';
+    //Petición
     $.post('acciones.php?id='+id+'&accion='+accion,function(data){
         $('#eliminar').html(data);
         $('#eliminar').css('display','block');
         $('#editar').css('display','none');
     });
 }
-
+//Función que oculta el cuadro de mensaje con la confirmación de la eliminación del colaborador
 function cancelarEliminar(){
         $('#eliminar').css('display','none');
         $('#editar').css('display','none');
 }
-
+//Función que realiza la petición de eliminar colaborador al pulsar "aceptar"
 function aceptarEliminar(id){
-    var accion='aceptar_eliminar';
+    //Variable que guarda la acción que queramos hacer al realizar la petición
+    var accion='aceptar_eliminar'
+    //Petición
     $.post('acciones.php?id='+id+'&accion='+accion,function(data){
-        if(data.trim()==='ko'){
+        //Condición que realiza diferentes acciones según la respuesta devuelta
+        if(data.trim()==='ko'){//Error consulta
             alert("Ha habido un error al realizar la petición solicitada intentelo de nuevo");
-        }else{
+        }else{//Consulta correcta
             $('#eliminar').css('display','none');
             $('#editar').css('display','none');
             location.reload();

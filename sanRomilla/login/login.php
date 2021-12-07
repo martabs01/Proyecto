@@ -5,7 +5,8 @@ Asignatura: Proyecto San Romilla
 Curso: 20-21
 Descripción: Inicio de sesión de los colaboradores
 */
-include("validarsesion.php"); //Archivo que incluye la validación del inicio de sesión
+//Archivo que incluye la validación del inicio de sesión
+include("validarsesion.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -43,11 +44,12 @@ include("validarsesion.php"); //Archivo que incluye la validación del inicio de
                                     </div>
                                     <div class="row loginbttm ">
                                         <?php
+                                            //Método que muestra mensajes según la respuesta recibida
                                             switch (validar()){
-                                                case 1:
+                                                case 1://Correo o contraseña incorrectos
                                                     echo '<p class="error">*Correo o contraseña incorrectos</p>';
                                                     break;
-                                                case 2:
+                                                case 2://Campos vacíos
                                                     echo '<p class="error">*Debes completar los campos del formulario</p>';
                                                     break;
                                             }
