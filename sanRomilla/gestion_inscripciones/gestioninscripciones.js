@@ -358,6 +358,7 @@ function mostrarInsertar() {
         $('#editar').css('display','none');
     });
 }
+
 //Función que muestra un cuadro de mensaje con el total del precio de la compra
 function totalCompra(){
     var accion='total_compra';//Variable que guarda la acción que queramos hacer al realizar la petición
@@ -438,7 +439,11 @@ function validarEditar(id){
             dorsal:{
                 required: true,
                 dorsal: true
-            }
+            },
+            dni:{
+                required: true,
+                dni: true
+            },
 
         },
         messages : {

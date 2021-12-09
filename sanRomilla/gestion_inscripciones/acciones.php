@@ -87,7 +87,7 @@ switch ($accion) {
                             </div>
                             <div  class="float-end mt-5">
                                 <button type="button"  id="add" class="btn btn-primary mb-5" ><i class="bi bi-plus"></i>Añadir inscripción</button>
-                                <button type="submit" class="btn btn-success mb-5 ms-4" >Finalizar inscripciones</button>
+                                <button type="button" class="btn btn-success mb-5 ms-4" onclick="totalCompra()">Finalizar inscripciones</button>
                             </div>
                         </form>
                     </div>
@@ -421,13 +421,25 @@ switch ($accion) {
             echo "ko";
         }
         break;
+    case 'cuadro_eliminar':?>
+        <!--Diseño del cuadro de eliminación-->
+        <div class="window-notice" id="window-notice">
+            <div class="content">
+                <div class="content-text justify-content-center">
+                    ¿Estás seguro de que quieres eliminar al colaborador
+                </div>
+                <div>
+                    <center>
+                        <button name="aceptar" type="button" class="btn btn-success m-3" onclick="aceptarEliminar(<?php echo $fila["idColaborador"] ?>)">Aceptar</button>
+                        <button name="cancelar" type="button" class="btn btn-danger m-3" onclick="cancelarEliminar()">Cancelar</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <?php
+        break;
 }
-//$dni="'".$_REQUEST["dni"][$i]."'";// Todas las variables caracter
-//$donacion=$_REQUEST["donacion"][$i]; //Todas las variables numericas
 
-/*$sql="INSERT INTO inscripcion (dni, fecha_nacimiento, nombre, apellidos, telefono, dorsal, donacion_dorsal, id_idTallaCamiseta_Talla, id_idCategoria_Categoria,terminos)
-            VALUES ($dni.','.$fecha_nacimiento.','.$nombre.','.$apellidos.','. $telefono.','.
-           $dorsal.','.$donacion .','. $talla .','. $idcat.','.$terminos);";*/
 ?>
 
 
