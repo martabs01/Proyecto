@@ -1,4 +1,3 @@
-
 <?php
 /*
     Alumno: Marta Broncano Suárez
@@ -96,10 +95,10 @@ if(isset($_SESSION["correo"])){
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="../documentacion/documentacion.php">
                     <i class="fa fa-info fa-2x"></i>
                     <span class="nav-text">
-                            Documentación
+                        Documentación
                     </span>
                 </a>
             </li>
@@ -160,6 +159,7 @@ if(isset($_SESSION["correo"])){
         <div id="mostrarInsertar" class="container"></div>
         <div id="editar" class="container"></div>
         <div id="cuadroTramitar" class="container"></div>
+        <div id="cuadroTerminos" class="container"></div>
     </main>
     <script src="../librerias/jquery.min.js"></script>
     <script src="../librerias/bootstrap.js"></script>

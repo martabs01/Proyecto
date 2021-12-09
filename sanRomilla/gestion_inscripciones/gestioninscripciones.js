@@ -265,16 +265,31 @@ let es = {
 };
 
 var i=0;//Inicialización de variable que usaremos para realizar la inserción dinámica
-//Función que contiene la estructura del formulario dinámico
+//Función que carga las tallas de las camisetas disponibles en el formulario
 function formulario(){
-    $('#dynamic_field').append('<table class="table mb-5" id="table'+i+'">' +
+    var accion='cargar_talla';
+    $.ajax({url:'acciones.php?accion='+accion,success:function(data){
+        //console.log(data)
+        formulario2(JSON.parse(data));
+    }});
+
+};
+
+//Función que contiene la estructura del formulario dinámico
+function formulario2(data){
+    console.log(data)
+    let tabla='<table class="table mb-5" id="table'+i+'">' +
         '<tr class="borde">'+
         '<td></td>' +
         '<td></td>' +
         '<td></td>' +
-        '<td>' +
-        '   <button type="button" name="remove" id="'+i+'" class=" btn btn-danger btn_remove float-end col-2 btn-sm m-3"><i class="bi bi-x-lg"></i></button>'+
-        '</td>' +
+        '<td>' ;
+        if(i==0){
+            tabla+=' '
+        }else{
+            tabla+='   <button type="button" name="remove" id="'+i+'" class=" btn btn-danger btn_remove float-end col-2 btn-sm m-3"><i class="bi bi-x-lg"></i></button>'
+        }
+        tabla+='</td>' +
         '</tr>'+
         '<tr>' +
         '<th>Nombre</th>\n' +
@@ -303,21 +318,17 @@ function formulario(){
         '<td>' +
         '<select class="inscripcion pt-1" name="talla[]">\n' +
         '\n' +
-        '<option value="0" >No quiere camiseta</option>\n' +
-        '\n' +
-        '<option>1</option>\n' +
-        '\n' +
-        '<option>2</option>\n' +
-        '\n' +
-        '<option>3</option>\n' +
-        '\n' +
-        '<option>4</option>\n' +
-        '\n' +
+        '<option value="0" >No quiere camiseta</option>\n' ;
+        for(let j=0; j<data.length; j++){
+            tabla+='<option value='+j+'>'+data[j][1]+'</option>\n' ;
+        }
+        tabla+=
         '</select>' +
         '</td>\n' +
         '</tr> ' +
-        '</table>')
-    i++;
+        '</table>'
+    i++
+    $('#dynamic_field').append(tabla);
     //Función que elimina la tabla sleccionada del formulario
     $(document).on('click', '.btn_remove', function(){
         var button_id = $(this).attr("id");//Método que guarda el id seleccionado
@@ -335,13 +346,7 @@ function formulario(){
             $('#donacion'+fecha_id+'').attr("placeholder","Indique el importe (mínimo "+precio+"€)"); //Método que añade placeholder al elemento selecionado
         });
     })
-
-    var accion='cargar_talla';
-    $.ajax('acciones.php?accion='+accion,function(a){
-        console.log(data)
-    });
-
-};
+}
 //Función que muestra el formulario de registro de inscripciones
 function mostrarInsertar() {
     var accion='mostrar_insertar';//Variable que guarda la acción que queramos hacer al realizar la petición
@@ -358,7 +363,19 @@ function mostrarInsertar() {
         $('#editar').css('display','none');
     });
 }
-
+//Función que carga el cuadro de diálogo de los términos
+function terminos(){
+    var accion='terminos';//Variable que guarda la acción que queramos hacer al realizar la petición
+    //Petición
+    $.post('acciones.php?accion='+accion,function(data){
+            $('#cuadroTerminos').html(data);
+            $('#cuadroTerminos').css('display','block');
+    });
+}
+//Función que oculta el cuadro de mensaje de términos
+function ocultarTerminos(){
+    $('#cuadroTerminos').css('display','none');
+}
 //Función que muestra un cuadro de mensaje con el total del precio de la compra
 function totalCompra(){
     var accion='total_compra';//Variable que guarda la acción que queramos hacer al realizar la petición
@@ -374,11 +391,11 @@ function totalCompra(){
         }
     });
 }
-//Funcion que oculta el cuadro de mensaje de confirmación de inscripciones si pulsa "volver"
+//Función que oculta el cuadro de mensaje de confirmación de inscripciones si pulsa "volver"
 function seguirComprando(){
     $('#cuadroTramitar').css('display','none');
 }
-//Función que realiza la petición para el registro de donaciones
+//Función que realiza la petición para el registro de inscripciones
 function insertar() {
     var accion='insertar'; //Variable que guarda la acción que queramos hacer al realizar la petición
     var str = $("#formulario").serialize(); //Variable que guarda los datos del formulario
@@ -404,7 +421,7 @@ function insertar() {
 
     });
 }
-//Función que muestra el formulario de edición de colaboradores
+//Función que muestra el formulario de edición de inscripciones
 function mostrarEditar(id){
     var accion='mostrar_editar'; //Variable que guarda la acción que queramos hacer al realizar la petición
     //Petición
@@ -414,7 +431,7 @@ function mostrarEditar(id){
         $('#tabla').css('display','none');
     });
 }
-//Función que valida la edición de colaboradores
+//Función que valida la edición de inscripciones
 function validarEditar(id){
     $("#submitenviar").validate({
         rules: {

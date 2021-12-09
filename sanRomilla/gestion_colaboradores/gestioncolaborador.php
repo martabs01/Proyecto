@@ -98,10 +98,10 @@ if(isset($_SESSION["correo"])){
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="../documentacion/documentacion.php">
                         <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
-                                Documentación
+                            Documentación
                         </span>
                     </a>
                 </li>

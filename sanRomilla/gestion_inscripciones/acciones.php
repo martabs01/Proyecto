@@ -74,42 +74,50 @@ switch ($accion) {
             </div>
             <div class="col-12 col-md-12">
                 <!-- Contenido -->
-                <div>
+                <div >
                     <div class="form-group mb-5">
                         <form  id="formulario" class="cmxform" action="#" method="POST" >
-                            <div class="table-responsive" id="dynamic_field">
-                            </div>
-                            <div class="form-check float-end">
+                            <div class="table-responsive" id="dynamic_field"></div>
+                            <div class="float-end form-check">
                                 <input class="form-check-input" type="checkbox" id="aceptar" name="aceptar">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Aceptar términos
+                                    <a href="javascript:terminos()">Aceptar términos</a>
+                                    <span style="color: red" class="ms-3">*Campo obligatorio</span>
+                                   <div class="mt-5">
+                                       <button type="button"  id="add" class="btn btn-primary me-3" ><i class="bi bi-plus"></i>Añadir inscripción</button>
+                                       <button type="button" class="btn btn-success " onclick="totalCompra()">Finalizar inscripciones</button>
+                                   </div>
                                 </label>
                             </div>
-                            <div  class="float-end mt-5">
-                                <button type="button"  id="add" class="btn btn-primary mb-5" ><i class="bi bi-plus"></i>Añadir inscripción</button>
-                                <button type="button" class="btn btn-success mb-5 ms-4" onclick="totalCompra()">Finalizar inscripciones</button>
-                            </div>
+
                         </form>
+
+
                     </div>
                 </div>
             </div>
         </div>
         <?php
         break;
-    case 'cargar_tallas':
+    case 'cargar_talla':
+        //Consulta de los datos de la tabla talla
         $sql="SELECT * FROM talla";
+        //Método que realiza consulta
         $objeto->hacer_consultas($sql);
+        //Variable que declara el array donde vamos a recoger los datos
+        $res=array();
+        //Comprobación de las filas devueltas
         if ($objeto->comprobar_consulta()>0) {
             while ($dato = $objeto->extraer_filas()) {
                 //Variable que el idTalla devuelto
                 $idtalla = $dato["idTallaCamiseta"];
                 //Variable que guarda la talla devuelta
                 $talla = $dato["talla_camiseta"];
-                echo $talla;
+                array_push($res,$dato);
+                //echo $talla;
             }
-        }else{
-            echo "nada";
         }
+        echo json_encode($res);
         break;
     case 'precio_dorsal':
         //Variable que recoge la fecha seleccionada
@@ -148,6 +156,29 @@ switch ($accion) {
                 }
             }
         }
+        break;
+    case 'terminos':
+        ?>
+        <div class="window-notice" id="window-notice">
+            <div class="content">
+                <div class="col-lg-12 pt-3 d-flex d-grid gap-2 d-md-flex justify-content-md-end"><button onclick="ocultarTerminos()" type="button" class="btn btn-danger btn-sm "><i class="bi bi-x-lg"></i></button></div>
+                <div class="content-text justify-content-center">
+                    <h5>Artículo 14</h5>
+                    <i>Aceptación</i>
+                    <p class="mt-3">
+                        Todos los participantes, por el hecho de inscribirse, reconocen que se encuentran en
+                        perfectas condiciones para la práctica deportiva, y se comprometen a correr bajo su
+                        estricta responsabilidad.
+                        Además de aceptar el presente reglamento y la utilización informática, y con el fin deportivo,
+                        de sus datos personales e imágenes dentro de la prueba mediante fotografías, vídeos, etc.
+                        En caso de duda o de surgir alguna situación no reflejada en el mismo, se estará a lo que
+                        disponga el Comité Organizador.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <?php
         break;
     case 'total_compra':
         //Tamaño del número de array

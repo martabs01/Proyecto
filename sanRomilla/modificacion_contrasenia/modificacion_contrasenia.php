@@ -91,12 +91,12 @@ if(isset($_SESSION["correo"])){
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-info fa-2x"></i>
-                    <span class="nav-text">
-                        Documentación
-                    </span>
-                </a>
+               <a href="../documentacion/documentacion.php">
+                 <i class="fa fa-info fa-2x"></i>
+                 <span class="nav-text">
+                     Documentación
+                 </span>       
+               </a>     
             </li>
             <li>
                 <a href="modificacion_contrasenia.php">
