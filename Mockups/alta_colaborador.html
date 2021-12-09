@@ -1,0 +1,86 @@
+<!--
+    Alumno: Marta Broncano Suárez
+    Asignatura: Proyecto San Romilla
+    Curso: 20-21
+    Descripción: Mockup del alta de colaboradores
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta colaboradores</title>
+    <script src="https://use.fontawesome.com/b99e2c8f94.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+<main id="filtro">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-6 col-md-8 login-box">
+                <div class="col-lg-12 pt-3 d-flex d-grid gap-2 d-md-flex justify-content-md-end"><button onclick="location.href='gestioncolaborador.html'" type="button" class="btn btn-danger btn-sm me-md-2"><i class="bi bi-x-lg"></i></button></div>
+                <div class="col-lg-12 pt-3 d-flex justify-content-center">
+                    <i class="bi bi-person-plus-fill login-key" aria-hidden="true"></i>
+                </div>
+                <div class="col-lg-12 login-title">
+                    NUEVO COLABORADOR
+                </div>
+                <div class="col-lg-12 login-form">
+                    <div class="col-lg-12 login-form">
+                        <form id="insertar" class="cmxform needs-validation" action="#" method="POST">
+                            <div class="form-group">
+                                <label class="form-control-label">CORREO</label>
+                                <input type="email" id="email" class="form-control" name="email"  required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">TIPO COLABORADOR</label>
+                                <br>
+                                <select class="w-100 mb-0 mt-4 form-control" name="tipo">
+                                    <option selected value="a">Administrador</option>
+                                    <option value="c">Colaborador</option>
+                                    <option value="m>">Meta</option>
+                                    <option value="i">Imagen</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">NOMBRE</label>
+                                <input type="text" id="nombre" class="form-control" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">APELLIDOS</label>
+                                <input type="text" id="apellidos" class="form-control" name="apellidos" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">TELÉFONO</label>
+                                <input type="text" id="telefono" class="form-control" name="telefono" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">CONTRASEÑA</label>
+                                <input id="password" type="password" class="form-control" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">REPETIR CONTRASEÑA</label>
+                                <input id="confirm_password" type="password" class="form-control" name="confirm_password" required>
+                            </div>
+                            <div class="row loginbttm p-3">
+                                <div class="col-lg-6 login-btm login-text">
+                                    Por favor, rellene el formulario para dar de alta un nuevo colaborador
+                                </div>
+                                <div class="col-lg-6 login-btm login-button">
+                                    <button type="submit" class="btn btn-outline-primary" name="enviar" id="enviar_colaborador" onclick="validar_insertar()">AÑADIR</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-2"></div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

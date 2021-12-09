@@ -1,0 +1,260 @@
+/*
+    Alumno: Marta Broncano Suárez
+    Asignatura: Proyecto San Romilla
+    Curso: 20-21
+    Descripción: Estilos de la administración en general
+ */
+.fa-2x {
+    font-size: 2em;
+}
+.fa {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size:20px;
+}
+
+
+.main-menu:hover,nav.main-menu.expanded{
+    width:250px;
+    overflow:visible;
+}
+.main-menu:hover~main{
+    filter: blur(4px);
+}
+.main-menu {
+    background:#FFD340;
+    border-right:1px solid #e5e5e5;
+    position:fixed;
+    top:0;
+    bottom:0;
+    height:100%;
+    left:0;
+    width:60px;
+    overflow:hidden;
+    -webkit-transition:width .05s linear;
+    transition:width .05s linear;
+    -webkit-transform:translateZ(0) scale(1,1);
+    z-index:1000;
+}
+
+.main-menu>ul {
+    margin:7px 0;
+}
+
+.main-menu li {
+    position:relative;
+    display:block;
+    width:250px;
+}
+
+.main-menu li>a {
+    position:relative;
+    display:table;
+    border-collapse:collapse;
+    border-spacing:0;
+    color:black;
+    font-family: arial;
+    font-size: 14px;
+    text-decoration:none;
+    -webkit-transform:translateZ(0) scale(1,1);
+    -webkit-transition:all .1s linear;
+    transition:all .1s linear;
+
+}
+
+.main-menu .nav-icon {
+    position:relative;
+    display:table-cell;
+    width:60px;
+    height:36px;
+    text-align:center;
+    vertical-align:middle;
+    font-size:18px;
+}
+
+.main-menu .nav-text {
+    position:relative;
+    display:table-cell;
+    vertical-align:middle;
+    width:190px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.main-menu>ul.logout {
+    position:absolute;
+    left:0;
+    bottom:0;
+}
+
+.no-touch .scrollable.hover {
+    overflow-y:hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+    overflow-y:auto;
+    overflow:visible;
+}
+
+a:hover,a:focus {
+    text-decoration:none;
+}
+
+nav {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    -o-user-select:none;
+    user-select:none;
+}
+
+nav ul,nav li {
+    outline:0;
+    margin:0;
+    padding:0;
+}
+.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+    color:#fff;
+    background-color:#0DB8DE;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Roboto'), local('Roboto'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+
+.login-box {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: auto;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.90), 0 3px 6px rgba(0, 0, 0, 0.90);
+}
+
+.login-key {
+    height: 110px;
+    font-size: 80px;
+    line-height: 100px;
+    width: auto;
+    background: -webkit-linear-gradient(#FFD340, #0DB8DE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-title {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.login-form {
+    margin-top: 25px;
+    text-align: left;
+}
+
+input[type="text"], input[type="password"],input[type="email"], input[type="date"], select{
+    border: none;
+    border-bottom: 2px solid #FFD340;
+    border-top: 0px;
+    border-radius: 0px;
+    outline: 0;
+    margin-bottom: 20px;
+    padding-left: 0px;
+    color: black;
+}
+
+.form-group {
+    margin-bottom: 40px;
+    outline: 0px;
+}
+
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: 2px solid #FFD340;
+    outline: 0;
+
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0;
+}
+
+label {
+    margin-bottom: 0px;
+}
+
+.form-control-label {
+    font-size: 14px;
+    color: #6C6C6C;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.btn-outline-primary {
+    background-color: #FFD340;
+    border-color: #FFD340;
+    color: black;
+    border-radius: 0px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.btn-outline-primary:hover {
+    background-color: #FFD340;
+    right: 0px;
+    color:black;
+    border: 1px solid black;
+}
+
+.login-button {
+    padding-right: 0px;
+    text-align: right;
+    margin-bottom: 25px;
+}
+
+.login-text {
+    text-align: left;
+    padding-left: 0px;
+    color: #A2A4A4;
+}
+
+.loginbttm {
+    padding: 0px;
+}
+
+.login-text:hover {
+    color: #0DB8DE;
+}
+.error{
+    color: red;
+}
+.correcto{
+    color:green;
+}
+#panel{
+    height: 150px;
+}
+.inscripcion{
+    width: 100%;
+}
+
+.borde{
+    border-bottom: white;
+}
+#centrar{
+    text-align: center;
+}
