@@ -410,7 +410,7 @@ function insertar() {
                 alert("Debe aceptar las condiciones");
             }else{
                 if(data.trim()==='ko'){//Error consulta
-                    alert("Ha habido un error al realizar la petición solicitada intentelo de nuevo");
+                    alert("El  dorsal ya está asignado a un registro de inscripción");
                 }else{//Consulta correcta
                     $('#cuadroTramitar').css('display','none');
                     $('#tabla').css('display','block');
@@ -490,7 +490,7 @@ function validarEditar(id){
                 required: "*Campo obligatorio",
                 dorsal: "*Sólo números"
             }
-
+        //Función que realiza una acción si la validación es correcta
         },submitHandler: function() {
             editar(id);
         }

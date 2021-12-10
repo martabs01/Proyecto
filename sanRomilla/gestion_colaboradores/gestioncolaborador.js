@@ -311,7 +311,7 @@ function validarInsertar(){
                 minlength: "Tu contraseña debe tener al menos 5 caracteres",
                 equalTo: "Ingrese la misma contraseña que la anterior"
             },
-
+        //Función que realiza una acción si la validación es correcta
         },submitHandler: function() {
             insertar();
         }
@@ -339,7 +339,7 @@ function insertar() {
     $.post('acciones.php?accion='+accion,str,function(data){
         //Condición que realiza diferentes acciones según la respuesta devuelta
         if(data.trim()==='ko'){ //Error en la consulta
-           alert("Ha habido un error al realizar la petición solicitada intentelo de nuevo");
+           alert("El correo introducido ya está asigando");
         }else{ //Consulta realizada
             $('#mostrarInsertar').css('display','none');
             $('#eliminar').css('display','none');
@@ -405,7 +405,7 @@ function validarEditar(id){
                 required:"*Campo obligatorio",
                 email: "El correo electrónico debe tener el formato: abc@domain.com"
             },
-
+        //Función que realiza una acción si la validación es correcta
         },submitHandler: function() {
             editar(id);
         }

@@ -15,8 +15,8 @@ session_start();//Método que recoge la sesión iniciada
     <title>Panel Administrador</title>
     <script src="https://use.fontawesome.com/b99e2c8f94.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="../estilos/estilos.css" type="text/css">
 </head>
 <?php
@@ -128,6 +128,17 @@ if(isset($_SESSION["correo"])){
         </div>
     </div>
 </main>
+<footer class="mb-5">
+   <center>
+      <a href="https://www.w3.org/WAI/WCAG2AAA-Conformance"
+           title="Explanation of WCAG 2 Level AAA conformance">
+           <img height="32" width="88"
+           src="https://www.w3.org/WAI/wcag2AAA"
+           alt="Level AAA conformance,
+           W3C WAI Web Content Accessibility Guidelines 2.0">
+       </a>
+   </center>         
+</footer>
 </body>
 ';
 }else{

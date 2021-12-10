@@ -291,7 +291,7 @@ function validarInsertar(){
                 required: "*Campo obligatorio",
                 dorsal: "*Este campo es tipo numérico "
             },
-
+            //Función que realiza una acción si la validación es correcta
         },submitHandler: function() {
             donacion();
         }
